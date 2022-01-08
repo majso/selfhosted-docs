@@ -1,0 +1,27 @@
+---
+version: '3.3'
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    volumes:
+      - ./vw_data:/data/
+    restart: on-failure
+    environment: 
+    # - WEBSOCKET_ENABLED=true
+      - ADMIN_TOKEN=$ADMIN_TOKEN
+      - WEB_VAULT_ENABLED=true
+      - SIGNUPS_ALLOWED=false
+
+    labels:
+      # Entry Point for https
+      - traefik.enable=true
+      - traefik.http.routers.vaultwarden.tls=true
+      - traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.$MY_DOMAIN`)
+      - traefik.http.routers.vaultwarden.entrypoints=https
+      - traefik.http.routers.vaultwarden.tls.certresolver=http
+
+networks:
+  default:
+    external:
+      name: $DEFAULT_NETWORK

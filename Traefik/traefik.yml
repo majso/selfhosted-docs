@@ -1,0 +1,31 @@
+## STATIC CONFIGURATION
+log:
+  level: ERROR
+
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+    network: proxy
+    exposedByDefault: false
+  file:
+    directory: "/opt/traefik/config"
+    watch: true
+
+certificatesResolvers:
+  http:
+    acme:
+      storage: "acme.json"
+      email: your@email.com
+      httpChallenge:
+        entryPoint: http

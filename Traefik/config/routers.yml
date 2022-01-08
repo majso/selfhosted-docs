@@ -1,0 +1,9 @@
+http:
+  routers:
+    redirecttohttps:
+      entryPoints:
+        - "http"
+      middlewares:
+        - "httpsredirect"
+      rule: "HostRegexp(`{host:.+}`)"
+      service: "noop@internal"
