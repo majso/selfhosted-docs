@@ -23,7 +23,7 @@ certificatesResolvers:
   http:
     acme:
       storage: "acme.json"
-      email: michal.grich@gmail.com
+      email: your.email@email.com
       httpChallenge:
         entryPoint: http
 
