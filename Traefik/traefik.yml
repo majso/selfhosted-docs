@@ -3,7 +3,7 @@ log:
   level: ERROR
 
 api:
-  insecure: true
+  #insecure: true
   dashboard: true
 
 entryPoints:
@@ -18,14 +18,26 @@ providers:
     watch: true
     network: proxy
     exposedByDefault: false
-  file:
-    directory: "/opt/traefik/config"
-    watch: true
 
 certificatesResolvers:
   http:
     acme:
       storage: "acme.json"
-      email: your@email.com
+      email: michal.grich@gmail.com
       httpChallenge:
         entryPoint: http
+
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+        - TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+
+    mintls13:
+      minVersion: VersionTLS13
