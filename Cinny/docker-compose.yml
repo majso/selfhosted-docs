@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  cinny:
+    image: ajbura/cinny:latest
+    labels:
+      # Traefik configuration, Hostname needs to be changed
+      - traefik.enable=true
+      - traefik.http.routers.cinny-http.entrypoints=http
+      - traefik.http.routers.cinny-http.rule=Host(`cinny.$MY_DOMAIN`)
+      - traefik.http.middlewares.cinny-https-redirect.redirectscheme.scheme=https
+      - traefik.http.routers.cinny-http.middlewares=cinny-https-redirect
+      - traefik.http.routers.cinny-https.entrypoints=https
+      - traefik.http.routers.cinny-https.rule=Host(`cinny.$MY_DOMAIN`)
+      - traefik.http.routers.cinny-https.tls.certresolver=http
+   
+networks:
+  default:
+    external:
+      name: $DEFAULT_NETWORK
