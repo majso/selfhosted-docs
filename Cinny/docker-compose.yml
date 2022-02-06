@@ -3,6 +3,8 @@ version: "3.3"
 services:
   cinny:
     image: ajbura/cinny:latest
+    volumes:
+      - ./config.json:/app/config.json
     labels:
       # Traefik configuration, Hostname needs to be changed
       - traefik.enable=true
