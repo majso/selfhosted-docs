@@ -6,8 +6,6 @@ services:
         # use tag 'next' for current dev version, 'lastest' for stable
         image: matrixconduit/matrix-conduit:latest
         restart: unless-stopped
-        ports:
-             - 8448:6167
         volumes:
             - db:/srv/conduit/.local/share/conduit
             ### Uncomment if you want to use conduit.toml to configure Conduit
