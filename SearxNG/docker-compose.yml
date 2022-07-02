@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  searxng:
+    container_name: searxng
+    image: searxng/searxng:latest
+    restart: always
+    volumes:
+      - ./searxng:/etc/searxng:rw
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.searxng.entrypoints=http"
+      - "traefik.http.routers.searxng.rule=Host(`search.$MY_DOMAIN`)"
+      - "traefik.http.middlewares.searxng-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.searxng.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.searxng-secure.entrypoints=https"
+      - "traefik.http.routers.searxng-secure.rule=Host(`search.$MY_DOMAIN`)"
+      - "traefik.http.routers.searxng-secure.tls=true"
+      - "traefik.http.routers.searxng-secure.tls.certresolver=http"
+      #authelia
+      - 'traefik.http.routers.searxng.middlewares=authelia@docker'
+      - 'traefik.http.routers.searxng-secure.middlewares=authelia@docker'
+
+      
+networks:
+  default:
+    external:
+      name: $DEFAULT_NETWORK
