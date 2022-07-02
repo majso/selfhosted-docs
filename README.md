@@ -7,3 +7,5 @@
 * Vaultwarden - Password Management
 * Conduit - Lightweight Matrix server written in Rust
 * Cinny - Lightweight Matrix client
+* SearxNG - Search agregator
+* Authelia - Authentication and authorization server 
