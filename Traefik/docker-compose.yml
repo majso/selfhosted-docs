@@ -1,8 +1,6 @@
-version: "3.3"
-
 services:
   traefik:
-    image: "traefik:v2.2"
+    image: "traefik:v3.3"
     container_name: "traefik"
     hostname: "traefik"
     ports:
@@ -28,5 +26,5 @@ services:
       
 networks:
   default:
-    external:
-      name: $DEFAULT_NETWORK
+    name: $DEFAULT_NETWORK
+    external: true

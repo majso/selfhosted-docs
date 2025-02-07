@@ -1,6 +1,4 @@
 # Conduit
-version: '3'
-
 services:
     homeserver:
         # use tag 'next' for current dev version, 'lastest' for stable
@@ -71,6 +69,6 @@ services:
 
 networks:
   default:
-    external:
-      name: $DEFAULT_NETWORK
+    name: $DEFAULT_NETWORK
+    external: true
 
